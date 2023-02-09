@@ -35,7 +35,7 @@ app.get("/recipes", async (request, response) => {
 app.get("recipes/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    const recipe = await pool.query("SELECT * FROM recipe WHERE rec_id = $1", [
+    const recipe = await pool.query("SELECT * FROM recipes WHERE rec_id = $1", [
       id,
     ]);
     response.json(recipe.rows[0]);
