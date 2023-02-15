@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db");
+const authorization = require("../middleware/authorization");
 
-router.post("/recipes", async (request, response) => {
+router.post("/recipes", authorization, async (request, response) => {
   try {
     const { name, describtion } = request.body;
     const newRecipe = await pool.query(
@@ -14,7 +15,7 @@ router.post("/recipes", async (request, response) => {
     console.error(error.message);
   }
 });
-router.get("/recipes", async (request, response) => {
+router.get("/recipes", authorization, async (request, response) => {
   try {
     const allRecipes = await pool.query("SELECT * FROM recipes");
     response.json(allRecipes);
