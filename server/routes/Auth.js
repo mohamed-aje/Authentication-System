@@ -26,9 +26,9 @@ router.post("/register", validInputs, async (request, response) => {
       [name, email, bcryptPassword]
     );
 
-    const jwtToken = jwtGenerator(newUser.rows[0].user_id);
-    console.log(jwtToken);
-    return response.json({ jwtToken });
+    const token = jwtGenerator(newUser.rows[0].user_id);
+    console.log(token);
+    return response.json({ token });
   } catch (err) {
     console.error(err.message);
     response.status(500).send("Server error");
